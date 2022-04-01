@@ -11,7 +11,6 @@ class HomeController extends AbstractController
     #[Route('/{name}', name: 'app_home')]
     public function index($name = 'world'): Response
     {
-        //$name = $request->get('name', 'world');
         return $this->render('home/index.html.twig', [
             'name' => $name,
         ]);
@@ -20,7 +19,6 @@ class HomeController extends AbstractController
     #[Route('/fr/contact', name: 'app_contact')]
     public function contact(): Response
     {
-        //return new Response('<h1>Contactez nous</h1>');
         return $this->render('home/contact.html.twig', [
             
         ]);
