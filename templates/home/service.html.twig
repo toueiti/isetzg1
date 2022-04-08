@@ -4,4 +4,11 @@
 
 {% block body %}
 <h1>Nos Service</h1>
+    <ul>
+        {% for service in services %}
+            <li>{{ service.title }}</li>
+            <li>{{ service.created|date('d/m/Y H:i:s') }}</li>
+                
+        {% endfor %}
+    </ul>
 {% endblock %}
