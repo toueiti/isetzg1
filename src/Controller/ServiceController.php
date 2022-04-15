@@ -39,4 +39,37 @@ class ServiceController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route('/{id}/show', name: '_show')]
+    public function show(Service $service): Response
+    {
+        return $this->render('service/show.html.twig', [
+            'service' => $service,
+        ]);
+    }
+
+    #[Route('/{id}/edit', name: '_edit')]
+    public function edit(Request $request, EntityManagerInterface $em, Service $service): Response
+    {
+        $form = $this->createForm(ServiceType::class, $service);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            $this->addFlash('success', 'Service updated successfully!');
+            return $this->redirectToRoute('app_service_list');
+        }
+        return $this->render('service/edit.html.twig', [
+            'service' => $service,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/{id}/delete', name: '_delete')]
+    public function delete(EntityManagerInterface $em, Service $service): Response
+    {
+        $em->remove($service);
+        $em->flush();
+        $this->addFlash('success', 'Service deleted successfully!');
+        return $this->redirectToRoute('app_service_list');
+    }
 }

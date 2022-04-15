@@ -1,25 +1,61 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Hello ServiceController!{% endblock %}
+{% block title %}
+    Hello ServiceController!
+{% endblock %}
 
 {% block body %}
-<h1>Services</h1>
+    <h1>
+        Services
+    </h1>
+    <p>
+        <a class="btn btn-primary" href="{{ path('app_service_new') }}">
+            Create a new service
+        </a>
+    </p>
     <table>
         <thead>
             <tr>
-                <th>Id</th>
-                <th>title</th>
-                <th>created At</th>
+                <th>
+                    Id
+                </th>
+                <th>
+                    title
+                </th>
+                <th>
+                    created At
+                </th>
+                <th>
+                    Actions
+                </th>
             </tr>
         </thead>
         <tbody>
-        {% for service in services %}
-            <tr>
-                <td>{{ service.id }}</td>
-                <td>{{ service.title }}</td>
-                <td>{{ service.created|date('Y-m-d H:i:s') }}</td>
-            </tr>
-        {% endfor %}
+            {% for service in services %}
+                <tr>
+                    <td>
+                        {{ service.id }}
+                    </td>
+                    <td>
+                        {{ service.title }}
+                    </td>
+                    <td>
+                        {{ service.created|date('Y-m-d H:i:s') }}
+                    </td>
+                    <td>
+                        <a class="btn btn-info" href="{{ path('app_service_show', { 'id': service.id }) }}">
+                            show
+                        </a>
+                        <a class="btn btn-success" href="{{ path('app_service_edit', { 'id': service.id }) }}">
+                            edit
+                        </a>
+                        <a class="btn btn-danger" onclick="return confirm('Are you sure?')" href="{{ path('app_service_delete', { 'id': service.id }) }}">
+                            delete
+                        </a>
+
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 

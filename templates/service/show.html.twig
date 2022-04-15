@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <h1>
+        {{ service.title }}
+        <small>
+            (
+            {{ service.created|date('Y-d-m H:i:s') }}
+            )
+            
+        </small>
+    </h1>
+    <div>
+        {{ service.description }}
+    </div>
+{% endblock %}
