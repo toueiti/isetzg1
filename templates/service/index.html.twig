@@ -8,12 +8,23 @@
     <h1>
         Services
     </h1>
-    <p>
-        <a class="btn btn-primary" href="{{ path('app_service_new') }}">
-            Create a new service
-        </a>
-    </p>
-    <table>
+    <form action="{{path('app_service_search')}}">
+    <div class="row">
+        <div class="col-3">
+            <a class="btn btn-primary" href="{{ path('app_service_new') }}">
+                Create a new service
+            </a>
+        </div>
+        <div class="col-4">
+            <input type="text" onkeyup="load()" class="form-control" name="keyword" id="search" placeholder="Search">           
+        </div>
+        <div class="col-1">
+            <button onclick="load()" type="button" class="btn btn-dark">Search</button>
+        </div>
+    </div>
+</form>
+    
+    <table class="table">
         <thead>
             <tr>
                 <th>
@@ -30,7 +41,7 @@
                 </th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="result">
             {% for service in services %}
                 <tr>
                     <td>
@@ -58,5 +69,13 @@
             {% endfor %}
         </tbody>
     </table>
-
+    <script>
+        var url = "{{ path('app_service_search') }}";
+        function load(e){
+            var keyword = $('#search').val();
+            $.get( url, {'keyword': keyword}, function( data ) {
+                $('#result').html(data);
+                });
+        }
+    </script>
 {% endblock %}

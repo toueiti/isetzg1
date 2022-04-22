@@ -72,4 +72,14 @@ class ServiceController extends AbstractController
         $this->addFlash('success', 'Service deleted successfully!');
         return $this->redirectToRoute('app_service_list');
     }
+
+    #[Route('/search', name: '_search')]
+    public function search(Request $request, EntityManagerInterface $em): Response
+    {
+        $keyword = $request->get('keyword');
+        $services = $em->getRepository(Service::class)->search($keyword);
+        return $this->render('service/search.html.twig', [
+            'services' => $services,
+        ]);
+    }
 }
