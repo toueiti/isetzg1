@@ -22,6 +22,9 @@ class Service
     #[ORM\Column(type: 'datetime')]
     private $created;
 
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'services')]
+    private $category;
+
     public function __construct()
     {
         $this->created = new \DateTime();
@@ -64,6 +67,18 @@ class Service
     public function setCreated(\DateTimeInterface $created): self
     {
         $this->created = $created;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

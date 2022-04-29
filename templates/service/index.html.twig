@@ -31,6 +31,8 @@
                     Id
                 </th>
                 <th>
+                    Categorie
+                <th>
                     title
                 </th>
                 <th>
@@ -47,6 +49,8 @@
                     <td>
                         {{ service.id }}
                     </td>
+                    <td>
+                        {{ service.category ? service.category.name : '' }}
                     <td>
                         {{ service.title }}
                     </td>

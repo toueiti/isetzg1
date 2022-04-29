@@ -17,6 +17,10 @@
     </head>
     <body>
         <div class="container">
+        <div class="menu">
+            <a href="{{ path('app_category_index') }}">Categories</a>
+            <a href="{{ path('app_service_list') }}">Services</a>
+        </div>
         {% block body %}{% endblock %}
     </div>
     </body>

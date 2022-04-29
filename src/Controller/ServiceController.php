@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Service;
 use App\Form\ServiceType;
+use App\Repository\ServiceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -74,10 +75,10 @@ class ServiceController extends AbstractController
     }
 
     #[Route('/search', name: '_search')]
-    public function search(Request $request, EntityManagerInterface $em): Response
+    public function search(Request $request, ServiceRepository $sr): Response
     {
         $keyword = $request->get('keyword');
-        $services = $em->getRepository(Service::class)->search($keyword);
+        $services = $sr->search($keyword);
         return $this->render('service/search.html.twig', [
             'services' => $services,
         ]);
