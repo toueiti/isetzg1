@@ -18,8 +18,10 @@
     <body>
         <div class="container">
         <div class="menu">
+            <a href="{{ path('app_user_index') }}">Utilsateurs</a>
             <a href="{{ path('app_category_index') }}">Categories</a>
             <a href="{{ path('app_service_list') }}">Services</a>
+            <a href="{{ path('app_logout') }}">Deconnexion</a>
         </div>
         {% block body %}{% endblock %}
     </div>
